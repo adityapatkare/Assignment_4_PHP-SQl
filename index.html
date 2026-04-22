@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment 4 - Form Validation</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <div class="container">
+        <form id="registration-form">
+
+            <h2>Registration Form</h2>
+
+            <input type="text" id="full-name" placeholder="Full Name">
+            <input type="number" id="mobile-number" placeholder="Mobile Number">
+            <input type="text" id="email" placeholder="Email">
+
+            <div class="password-box">
+                <input type="password" id="password" placeholder="Password">
+            </div>
+
+            <div class="buttons">
+            <button type="button" id="toggle-password">Show</button>
+            <button type="submit">Submit</button>
+            </div>
 
 
+            <div id="message"></div>
+
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
-    <script> src="https://code.jquery.com/jquery-3.6.0.min.js" </script>
 </body>
+
 </html>
