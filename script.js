@@ -3,9 +3,8 @@ $(document).ready(function () {
     // Show/Hide Password
     $("#toggle-password").click(function () {
         let passwordField = $("#password");
-        let type = passwordField.attr("type");
 
-        if (type === "password") {
+        if (passwordField.attr("type") === "password") {
             passwordField.attr("type", "text");
             $(this).text("Hide");
         } else {
@@ -25,32 +24,29 @@ $(document).ready(function () {
 
         let message = $("#message");
 
-        // Clear previous message
+        // clear previous message
         message.removeClass("error success").hide();
 
-        // Validation
-        if (name === "" || email === "" || phone === "" || password === "") {
-            showError("Enter a valid name");
-            return;
-        }
+        // check empty fields
+        if (name === "") {
+    showError("Enter your name");
+    return;
+}
 
-        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-            showError("Invalid email format");
-            return;
-        }
+if (phone === "") {
+    showError("Enter mobile number");
+    return;
+}
 
-        let phonePattern = /^[0-9]{10}$/;
-        if (!phonePattern.test(phone)) {
-            showError("Phone must be 10 digits");
-            return;
-        }
+if (email === "") {
+    showError("Enter email");
+    return;
+}
 
-        let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
-        if (!passwordPattern.test(password)) {
-            showError("Password must contain uppercase, lowercase, number and be 6+ chars");
-            return;
-        }
+if (password === "") {
+    showError("Enter password");
+    return;
+}
 
         showSuccess("Form submitted successfully!");
     });
