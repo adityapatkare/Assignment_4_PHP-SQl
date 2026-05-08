@@ -1,121 +1,85 @@
-/* Remove default browser margin */
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #ffffff;
 }
 
 body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
 }
 
 .container {
-    background: white;
-    padding: 20px;
+    background-color: white;
+    padding: 25px;
     border-radius: 10px;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 320px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #registration-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 input {
-    margin: 10px 0;
     padding: 10px;
-    width: 200px;
+    margin-bottom: 12px;
     border: 2px solid #ccc;
-    border-radius: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#toggle-password {
-    background-color: #6c757d;
-    margin-top: 10px;
+    border-radius: 6px;
+    width: 100%;
 }
 
 .password-box {
     display: flex;
+    gap: 5px;
+    align-items: center;
 }
 
 .password-box input {
     flex: 1;
 }
 
-.password-box button {
-    width: 80px;
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    font-size: 14px;
 }
 
-.password {
-    margin: 10px 0;
+#toggle-password {
+    width: 70px;
+    background-color: #6c757d;
     padding: 10px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.password-input {
-    margin: 10px 0;
-    padding: 10px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.password-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-bottom: 12px;
 }
 
 #message {
-    margin: 10px 0;
+    margin-top: 12px;
     padding: 10px;
-    width: 200px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #e9ecef;
     display: none;
+    text-align: center;
 }
 
 .error {
-    background: #ffdddd;
+    background-color: #ffd6d6;
     color: red;
 }
 
 .success {
-    background: #ddffdd;
+    background-color: #d6ffd6;
     color: green;
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
 }

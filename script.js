@@ -1,62 +1,98 @@
 $(document).ready(function () {
 
-    // Show/Hide Password
+    // show and hide password
     $("#toggle-password").click(function () {
+
         let passwordField = $("#password");
 
         if (passwordField.attr("type") === "password") {
+
             passwordField.attr("type", "text");
             $(this).text("Hide");
+
         } else {
+
             passwordField.attr("type", "password");
             $(this).text("Show");
         }
     });
 
-    // Form Submit
+
+    // form submit
     $("#registration-form").submit(function (e) {
+
         e.preventDefault();
 
         let name = $("#full-name").val().trim();
-        let email = $("#email").val().trim();
         let phone = $("#mobile-number").val().trim();
+        let email = $("#email").val().trim();
         let password = $("#password").val().trim();
 
-        let message = $("#message");
+        $("#message").removeClass("error success").hide();
 
-        // clear previous message
-        message.removeClass("error success").hide();
 
-        // check empty fields
-        if (name === "") {
-    showError("Enter your name");
-    return;
-}
+        // empty fields check
+        if (name === "" || phone === "" || email === "" || password === "") {
 
-if (phone === "") {
-    showError("Enter mobile number");
-    return;
-}
+            showError("All fields are required");
+            return;
+        }
 
-if (email === "") {
-    showError("Enter email");
-    return;
-}
 
-if (password === "") {
-    showError("Enter password");
-    return;
-}
+        // email validation
+        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-        showSuccess("Form submitted successfully!");
+        if (!emailPattern.test(email)) {
+
+            showError("Enter valid email");
+            return;
+        }
+
+
+        // phone validation
+        let phonePattern = /^[0-9]{10}$/;
+
+        if (!phonePattern.test(phone)) {
+
+            showError("Phone number must be 10 digits");
+            return;
+        }
+
+
+        // password validation
+        let passwordPattern =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/;
+
+        if (!passwordPattern.test(password)) {
+
+            showError(
+                "Password must contain uppercase, lowercase and number"
+            );
+
+            return;
+        }
+
+
+        showSuccess("Form submitted successfully");
+
     });
 
-    function showError(msg) {
-        $("#message").addClass("error").text(msg).show();
+
+    function showError(message) {
+
+        $("#message")
+            .addClass("error")
+            .text(message)
+            .show();
     }
 
-    function showSuccess(msg) {
-        $("#message").addClass("success").text(msg).show();
+
+    function showSuccess(message) {
+
+        $("#message")
+            .addClass("success")
+            .text(message)
+            .show();
     }
 
 });
