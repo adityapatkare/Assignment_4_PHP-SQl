@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // show and hide password
+    // Show / Hide Password
     $("#toggle-password").click(function () {
 
         let passwordField = $("#password");
@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
 
 
-    // form submit
+    // Form Submit
     $("#registration-form").submit(function (e) {
 
         e.preventDefault();
@@ -31,53 +31,91 @@ $(document).ready(function () {
         $("#message").removeClass("error success").hide();
 
 
-        // empty fields check
-        if (name === "" || phone === "" || email === "" || password === "") {
+        // Name Validation
+        if (name === "") {
 
-            showError("All fields are required");
+            showError("Please enter your full name");
+            return;
+        }
+
+        // only letters and spaces
+        let namePattern = /^[A-Za-z ]+$/;
+
+        if (!namePattern.test(name)) {
+
+            showError("Name should contain only letters");
+            return;
+        }
+
+        // minimum name length
+        if (name.length < 3) {
+
+            showError("Name should be at least 3 characters");
             return;
         }
 
 
-        // email validation
-        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        // Phone Validation
+        if (phone === "") {
 
-        if (!emailPattern.test(email)) {
-
-            showError("Enter valid email");
+            showError("Please enter mobile number");
             return;
         }
 
-
-        // phone validation
+        // only numbers and exactly 10 digits
         let phonePattern = /^[0-9]{10}$/;
 
         if (!phonePattern.test(phone)) {
 
-            showError("Phone number must be 10 digits");
+            showError("Mobile number must be 10 digits");
             return;
         }
 
 
-        // password validation
+        // Email Validation
+        if (email === "") {
+
+            showError("Please enter email");
+            return;
+        }
+
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+
+            showError("Please enter valid email");
+            return;
+        }
+
+
+        // Password Validation
+        if (password === "") {
+
+            showError("Please enter password");
+            return;
+        }
+
+        // strong password check
         let passwordPattern =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/;
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
         if (!passwordPattern.test(password)) {
 
             showError(
-                "Password must contain uppercase, lowercase and number"
+                "Password must contain uppercase, lowercase, number and minimum 6 characters"
             );
 
             return;
         }
 
 
+        // Success
         showSuccess("Form submitted successfully");
 
     });
 
 
+    // Error Message Function
     function showError(message) {
 
         $("#message")
@@ -87,6 +125,7 @@ $(document).ready(function () {
     }
 
 
+    // Success Message Function
     function showSuccess(message) {
 
         $("#message")
