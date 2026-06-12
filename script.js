@@ -1,24 +1,20 @@
 $(document).ready(function () {
 
-    // show and hide password
+    // Show / Hide Password
     $("#toggle-password").click(function () {
 
         let passwordField = $("#password");
 
         if (passwordField.attr("type") === "password") {
-
             passwordField.attr("type", "text");
             $(this).text("Hide");
-
         } else {
-
             passwordField.attr("type", "password");
             $(this).text("Show");
         }
     });
 
-
-    // form submit
+    // Form Submit
     $("#registration-form").submit(function (e) {
 
         e.preventDefault();
@@ -28,55 +24,74 @@ $(document).ready(function () {
         let email = $("#email").val().trim();
         let password = $("#password").val().trim();
 
-        $("#message").removeClass("error success").hide();
+        $("#message")
+            .removeClass("error success")
+            .hide();
 
-
-        // empty fields check
-        if (name === "" || phone === "" || email === "" || password === "") {
-
-            showError("All fields are required");
+        // Name Validation
+        if (name === "") {
+            showError("Please enter your full name");
             return;
         }
 
+        let namePattern = /^[A-Za-z ]+$/;
 
-        // email validation
-        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
-        if (!emailPattern.test(email)) {
-
-            showError("Enter valid email");
+        if (!namePattern.test(name)) {
+            showError("Name should contain only letters");
             return;
         }
 
+        if (name.length < 3) {
+            showError("Name must be at least 3 characters");
+            return;
+        }
 
-        // phone validation
-        let phonePattern = /^[0-9]{10}$/;
+        // Phone Validation
+        if (phone === "") {
+            showError("Please enter mobile number");
+            return;
+        }
+
+        // Indian mobile validation
+        let phonePattern = /^[6-9]\d{9}$/;
 
         if (!phonePattern.test(phone)) {
-
-            showError("Phone number must be 10 digits");
+            showError("Enter a valid 10-digit mobile number");
             return;
         }
 
+        // Email Validation
+        if (email === "") {
+            showError("Please enter email");
+            return;
+        }
 
-        // password validation
+        let emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            showError("Enter a valid email address");
+            return;
+        }
+
+        // Password Validation
+        if (password === "") {
+            showError("Please enter password");
+            return;
+        }
+
         let passwordPattern =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/;
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
         if (!passwordPattern.test(password)) {
-
             showError(
                 "Password must contain uppercase, lowercase and number"
             );
-
             return;
         }
 
-
         showSuccess("Form submitted successfully");
-
     });
-
 
     function showError(message) {
 
@@ -85,7 +100,6 @@ $(document).ready(function () {
             .text(message)
             .show();
     }
-
 
     function showSuccess(message) {
 
