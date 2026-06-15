@@ -37,6 +37,18 @@ input {
     border: 2px solid #ccc;
     border-radius: 6px;
     width: 100%;
+    transition: border-color 0.2s;
+}
+
+/* ADDED: visual feedback per field */
+input.invalid {
+    border-color: #dc3545;
+    background-color: #fff5f5;
+}
+
+input.valid {
+    border-color: #28a745;
+    background-color: #f5fff7;
 }
 
 .password-box {
@@ -64,6 +76,11 @@ button {
     background-color: #6c757d;
     padding: 10px;
     margin-bottom: 12px;
+}
+
+/* CHANGED: slight top margin so submit button breathes after password row */
+#registration-form button[type="submit"] {
+    margin-top: 4px;
 }
 
 #message {
