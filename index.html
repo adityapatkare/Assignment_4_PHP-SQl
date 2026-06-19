@@ -15,9 +15,9 @@
 
             <input type="text" id="full-name" placeholder="Full Name" autocomplete="name" required>
 
-            <!-- FIXED: Changed type to "tel" to fix arrows and enforce the 10-digit limit natively -->
+            <!-- FIXED: type="tel" hides arrows, maxlength stops extra digits, and oninput blocks text characters -->
             <input type="tel" id="mobile-number" placeholder="Mobile Number" maxlength="10" minlength="10"
-                autocomplete="tel" required>
+                oninput="this.value = this.value.replace(/[^0-9]/g, '');" autocomplete="tel" required>
 
             <input type="email" id="email" placeholder="Email" autocomplete="email" required>
 
@@ -32,7 +32,7 @@
         <div id="message"></div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://jquery.com"></script>
     <script src="script.js"></script>
 </body>
 
