@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+    // ADDED: strip any non-digit characters as user types in phone field
+    // (tel inputs don't restrict characters natively, unlike type="number")
+    $("#mobile-number").on("input", function () {
+        let cleaned = $(this).val().replace(/\D/g, "").slice(0, 10);
+        $(this).val(cleaned);
+    });
+
     // Show / Hide Password
     $("#toggle-password").click(function () {
         let passwordField = $("#password");
@@ -12,14 +19,12 @@ $(document).ready(function () {
         }
     });
 
-    // ADDED: helper to mark a field valid or invalid visually
     function highlightField(id, isValid) {
         $("#" + id)
             .toggleClass("invalid", !isValid)
             .toggleClass("valid", isValid);
     }
 
-    // Reset all field highlights before each validation pass
     function resetHighlights() {
         $("input").removeClass("invalid valid");
     }
@@ -31,14 +36,9 @@ $(document).ready(function () {
         let name     = $("#full-name").val().trim();
         let phone    = $("#mobile-number").val().trim();
         let email    = $("#email").val().trim();
-
-        // BUG FIX: do NOT trim password — spaces are valid password characters
-        // trimming before validation was silently stripping characters
         let password = $("#password").val();
 
         $("#message").removeClass("error success").hide();
-
-        // Reset all borders before re-validating
         resetHighlights();
 
         // ── Name Validation ──────────────────────────────
@@ -61,9 +61,16 @@ $(document).ready(function () {
         highlightField("full-name", true);
 
         // ── Phone Validation ─────────────────────────────
+        // CHECKED: regex /^[6-9]\d{9}$/ is correct — exactly 10 digits,
+        // first digit must be 6, 7, 8, or 9 (valid Indian mobile prefix)
         if (phone === "") {
             highlightField("mobile-number", false);
             showError("Mobile number is required");
+            return;
+        }
+        if (phone.length !== 10) {
+            highlightField("mobile-number", false);
+            showError("Mobile number must be exactly 10 digits");
             return;
         }
         let phonePattern = /^[6-9]\d{9}$/;
@@ -89,7 +96,6 @@ $(document).ready(function () {
         highlightField("email", true);
 
         // ── Password Validation ──────────────────────────
-        // BUG FIX: validate raw password (not trimmed)
         if (password === "") {
             highlightField("password", false);
             showError("Password is required");

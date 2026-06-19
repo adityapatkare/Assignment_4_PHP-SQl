@@ -40,7 +40,6 @@ input {
     transition: border-color 0.2s;
 }
 
-/* ADDED: visual feedback per field */
 input.invalid {
     border-color: #dc3545;
     background-color: #fff5f5;
@@ -78,7 +77,6 @@ button {
     margin-bottom: 12px;
 }
 
-/* CHANGED: slight top margin so submit button breathes after password row */
 #registration-form button[type="submit"] {
     margin-top: 4px;
 }
