@@ -15,8 +15,8 @@
 
             <input type="text" id="full-name" placeholder="Full Name" autocomplete="name" required>
 
-            <!-- CHANGE: added minlength="10" to match JS validation -->
-            <input type="number" id="mobile-number" placeholder="Mobile Number" maxlength="10" minlength="10"
+            <!-- FIXED: Changed type to "tel" to fix arrows and enforce the 10-digit limit natively -->
+            <input type="tel" id="mobile-number" placeholder="Mobile Number" maxlength="10" minlength="10"
                 autocomplete="tel" required>
 
             <input type="email" id="email" placeholder="Email" autocomplete="email" required>
@@ -29,7 +29,6 @@
             <button type="submit">Submit</button>
         </form>
 
-        <!-- CHANGE: moved #message outside <form> to avoid reflow issues -->
         <div id="message"></div>
     </div>
 
